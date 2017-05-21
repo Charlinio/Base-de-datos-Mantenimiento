@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class josuellorona extends javax.swing.JFrame {
   Conexion con= new Conexion();
   
-  //VARIABLE PARA CAPTURAR EL ID DEL CLIENTE
-  String idCliente = null;
+  //VARIABLE PARA CAPTURAR EL ID DEL CLIENTE y REFACCION
+  String idCliente = null, idRefaccion = null;
 
     /**
      * Creates new form josuellorona
@@ -33,11 +33,12 @@ public class josuellorona extends javax.swing.JFrame {
         automovil();
         clientes();
         comboClientes();
+        comboRefaccion();
     }
     
     //TABLA PEDIDOS
     public void pedidos (){
-        con.tabla("Select * from pedidos",tablapedidos.getModel());
+        con.tabla("Select p.id_pedido, nombre, p.fecha_pedido, p.estado, p.cantidad from pedidos as p, refacciones where p.refaccion = refacciones.id_refaccion",tablapedidos.getModel());
     }
     
     //TABLA AUTOMOVIL
@@ -73,6 +74,28 @@ public class josuellorona extends javax.swing.JFrame {
             System.out.println(e.getErrorCode());
         }
     }
+    //CAPTURAR REFACCIONES PARA AGREGARLAS AL COMBOBOX
+    private void comboRefaccion(){
+      try {
+          ResultSet rs = con.st.executeQuery("select nombre from refacciones");
+          while(rs.next()){
+              pcmbrefaccion.addItem(rs.getString(1));
+          }
+      } catch (SQLException e) {
+          System.out.println(e.getErrorCode());
+      }
+    }
+    
+    //CAPTURAR ID DE LA REFACCION
+    private void idRefaccion(){
+      try {
+          ResultSet rs = con.st.executeQuery("select id_refaccion from refacciones where nombre = '"+pcmbrefaccion.getSelectedItem()+"'");
+          rs.last();
+          idRefaccion = rs.getString(1);
+      } catch (SQLException ex) {
+          Logger.getLogger(josuellorona.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,12 +110,13 @@ public class josuellorona extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablapedidos = new javax.swing.JTable();
         idpedido = new javax.swing.JTextField();
-        refaccion = new javax.swing.JTextField();
-        fechapedido = new javax.swing.JTextField();
         estado = new javax.swing.JTextField();
         btnInsertarPedidos = new javax.swing.JButton();
         btnModificarPedidos = new javax.swing.JButton();
         btnEliminarPedidos = new javax.swing.JButton();
+        pcmbrefaccion = new javax.swing.JComboBox();
+        fechapedido = new javax.swing.JFormattedTextField();
+        pcantidad = new javax.swing.JTextField();
         panelautomovil = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablautomovil = new javax.swing.JTable();
@@ -164,16 +188,6 @@ public class josuellorona extends javax.swing.JFrame {
         idpedido.setText("Id Pedido");
         idpedido.setPreferredSize(new java.awt.Dimension(73, 31));
 
-        refaccion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        refaccion.setForeground(new java.awt.Color(153, 153, 153));
-        refaccion.setText("Refaccion");
-        refaccion.setPreferredSize(new java.awt.Dimension(72, 31));
-
-        fechapedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        fechapedido.setForeground(new java.awt.Color(153, 153, 153));
-        fechapedido.setText("Fecha Pedido");
-        fechapedido.setMinimumSize(new java.awt.Dimension(6, 31));
-
         estado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         estado.setForeground(new java.awt.Color(153, 153, 153));
         estado.setText("Estado");
@@ -199,30 +213,44 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        pcmbrefaccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Refaccion" }));
+
+        try {
+            fechapedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        pcantidad.setText("Cantidad");
+
         javax.swing.GroupLayout panelpedidosLayout = new javax.swing.GroupLayout(panelpedidos);
         panelpedidos.setLayout(panelpedidosLayout);
         panelpedidosLayout.setHorizontalGroup(
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpedidosLayout.createSequentialGroup()
+                .addGap(0, 2, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelpedidosLayout.createSequentialGroup()
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelpedidosLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(idpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(refaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(fechapedido, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelpedidosLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnInsertarPedidos)
                         .addGap(18, 18, 18)
                         .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminarPedidos)))
-                .addGap(238, 238, 238))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminarPedidos))
+                    .addGroup(panelpedidosLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(idpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pcmbrefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(fechapedido, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelpedidosLayout.setVerticalGroup(
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,9 +258,11 @@ public class josuellorona extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(idpedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(refaccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechapedido, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(pcmbrefaccion)
+                        .addComponent(fechapedido, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsertarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -665,13 +695,24 @@ public class josuellorona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarPedidosActionPerformed
-        con.insertaryact("Insert Into pedidos values('"+idpedido.getText()+"','"+refaccion.getText()+"','"+fechapedido.getText()+"','"+estado.getText()+"' );");
-        pedidos();
+        if(pcmbrefaccion.getSelectedItem().equals("Refaccion")){
+            JOptionPane.showMessageDialog(null, "Seleccione la REFACCION a pedir");
+        }else{
+            idRefaccion();
+            con.insertaryact("Insert Into pedidos values('"+idpedido.getText()+"','"+idRefaccion+"','"+fechapedido.getText()+"','"+estado.getText()+"',"+pcantidad.getText()+");");
+            pedidos(); 
+        }
+
     }//GEN-LAST:event_btnInsertarPedidosActionPerformed
 
     private void btnModificarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPedidosActionPerformed
-        con.insertaryact("Update pedidos set refaccion='"+refaccion.getText()+"',fecha_pedido= '"+fechapedido.getText()+"',estado ='"+estado.getText()+"' where id_pedido= '"+idpedido.getText()+"';");
-        pedidos();
+        if(pcmbrefaccion.getSelectedItem().equals("Refaccion")){
+            JOptionPane.showMessageDialog(null, "Seleccione la REFACCION a pedir");
+        }else{
+            idRefaccion();
+            con.insertaryact("Update pedidos set refaccion='"+idRefaccion+"',fecha_pedido= '"+fechapedido.getText()+"',estado ='"+estado.getText()+"', cantidad='"+pcantidad.getText()+"' where id_pedido= '"+idpedido.getText()+"';");
+            pedidos();
+        }
     }//GEN-LAST:event_btnModificarPedidosActionPerformed
 
     private void btnEliminarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedidosActionPerformed
@@ -682,9 +723,10 @@ public class josuellorona extends javax.swing.JFrame {
     private void tablapedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablapedidosMouseClicked
         int fila= tablapedidos.getSelectedRow();
         idpedido.setText(tablapedidos.getValueAt(fila, 0).toString());
-        refaccion.setText(tablapedidos.getValueAt(fila, 1).toString());
+        pcmbrefaccion.setSelectedItem(tablapedidos.getValueAt(fila, 1).toString());
         fechapedido.setText(tablapedidos.getValueAt(fila,2).toString());
         estado.setText(tablapedidos.getValueAt(fila,3).toString());
+        pcantidad.setText(tablapedidos.getValueAt(fila,4).toString());
     }//GEN-LAST:event_tablapedidosMouseClicked
 
     private void insertarautomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarautomovilActionPerformed
@@ -698,8 +740,6 @@ public class josuellorona extends javax.swing.JFrame {
     }//GEN-LAST:event_insertarautomovilActionPerformed
 
     private void modificarautomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarautomovilActionPerformed
-        
-        
         if(cmbcliente.getSelectedItem().equals("Cliente")){
             JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
         }else{
@@ -771,7 +811,7 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbcliente;
     private javax.swing.JButton eliminarautomovil;
     private javax.swing.JTextField estado;
-    private javax.swing.JTextField fechapedido;
+    private javax.swing.JFormattedTextField fechapedido;
     private javax.swing.JTextField idpedido;
     private javax.swing.JButton insertarautomovil;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -811,7 +851,8 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JPanel panelpedidos;
     private javax.swing.JPanel panelrefacciones;
     private javax.swing.JPanel panelservicios;
-    private javax.swing.JTextField refaccion;
+    private javax.swing.JTextField pcantidad;
+    private javax.swing.JComboBox pcmbrefaccion;
     private javax.swing.JTabbedPane tab5;
     private javax.swing.JTable tablaclientes;
     private javax.swing.JTable tablapedidos;
