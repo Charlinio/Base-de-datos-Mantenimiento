@@ -256,6 +256,11 @@ public class josuellorona extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablautomovil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablautomovilMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tablautomovil);
 
         anumserie.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -708,6 +713,15 @@ public class josuellorona extends javax.swing.JFrame {
         con.eliminar("Delete From automovil where id_auto='"+aidvehiculo.getText()+"';");
         automovil();
     }//GEN-LAST:event_eliminarautomovilActionPerformed
+
+    private void tablautomovilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablautomovilMouseClicked
+        int fila= tablautomovil.getSelectedRow();
+        aidvehiculo.setText(tablautomovil.getValueAt(fila, 0).toString());
+        anumserie.setText(tablautomovil.getValueAt(fila, 1).toString());
+        cmbcliente.setSelectedItem(tablautomovil.getValueAt(fila,2).toString());
+        anombre.setText(tablautomovil.getValueAt(fila,3).toString());
+        amodelo.setText(tablautomovil.getValueAt(fila,4).toString());
+    }//GEN-LAST:event_tablautomovilMouseClicked
 
     /**
      * @param args the command line arguments
