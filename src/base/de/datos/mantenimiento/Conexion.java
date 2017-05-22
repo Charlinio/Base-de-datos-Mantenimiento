@@ -19,7 +19,7 @@ public class Conexion {
     public Conexion() {
         try{
            Class.forName("com.mysql.jdbc.Driver");
-           conn=DriverManager.getConnection("jdbc:mysql://127.0.0.1/agencia","root","");
+           conn=DriverManager.getConnection("jdbc:mysql://127.0.0.1/agencia_mantenimiento","root","");
            st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
            if(conn!= null){
                System.out.println("Conexion establecida");
@@ -71,9 +71,7 @@ public class Conexion {
                  JOptionPane.showMessageDialog(null,"Registro Eliminado!");
              } catch (SQLException e) {
                  System.out.println(e.getErrorCode());
-                 if(e.getMessage().equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'PRIMARY'")){
-                     JOptionPane.showMessageDialog(null, "ID Repetido");
-                 }
+                 System.out.println(e.getMessage());
                  
              }
          }                  
