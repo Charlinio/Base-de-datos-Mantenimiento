@@ -6,6 +6,7 @@
 package base.de.datos.mantenimiento;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -310,7 +311,7 @@ public class josuellorona extends javax.swing.JFrame {
         clientes.setLayout(clientesLayout);
         clientesLayout.setHorizontalGroup(
             clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1288, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1298, Short.MAX_VALUE)
             .addGroup(clientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +333,7 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(btnModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(525, Short.MAX_VALUE))
+                .addContainerGap(535, Short.MAX_VALUE))
         );
         clientesLayout.setVerticalGroup(
             clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,7 +441,7 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(amodelo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(aidvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(545, Short.MAX_VALUE))
+                .addContainerGap(555, Short.MAX_VALUE))
         );
         panelautomovilLayout.setVerticalGroup(
             panelautomovilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,7 +636,7 @@ public class josuellorona extends javax.swing.JFrame {
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpedidosLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1286, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1296, Short.MAX_VALUE))
             .addGroup(panelpedidosLayout.createSequentialGroup()
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelpedidosLayout.createSequentialGroup()
@@ -823,7 +824,7 @@ public class josuellorona extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(161, 161, 161))
+                .addGap(171, 171, 171))
         );
         panelserviciosLayout.setVerticalGroup(
             panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -915,7 +916,7 @@ public class josuellorona extends javax.swing.JFrame {
                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(729, Short.MAX_VALUE))
+                .addContainerGap(739, Short.MAX_VALUE))
         );
         panelingresosLayout.setVerticalGroup(
             panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1108,29 +1109,30 @@ public class josuellorona extends javax.swing.JFrame {
         }else if(idempleadoserv.getSelectedItem().equals("Id_empleado")){
             JOptionPane.showMessageDialog(null, "Eliga empleado");
         }else{
-            idClienteServ();
-            idRefaccionServ();
-            con.insertaryact("Insert into servicio(nombre,fecha,id_empleado,cliente,auto,descripcion,costo_Servicio)"
+            try{
+                idClienteServ();
+                idRefaccionServ();
+                PreparedStatement ppst = con.conn.prepareStatement("Insert into servicio(nombre,fecha,id_empleado,cliente,auto,descripcion,costo_Servicio)"
             + " values('"+nombreserv.getText()+"','"+fechaserv.getText()+"','"+idempleadoserv.getSelectedItem()+"','"+idCliente2+"',"+autoidserv.getSelectedItem()+",'"+descserv.getText()+"',"+costoserv.getText()+");");
-            servicios();
-            ingresos();
-            try {
+                ppst.executeUpdate();
+                servicios();
+                ingresos();
                 ResultSet rs1 = con.st.executeQuery("select id_servicio from servicio");
                 rs1.last();
                 cont = Integer.parseInt(rs1.getString(1));
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                for (int i=0;i<modelo.getSize();i++){
+                    try {
+                        ResultSet rs = con.st.executeQuery("select id_refaccion from refacciones where nombre='"+modelo.getElementAt(i)+"'");
+                        rs.last();
+                        con.insertaryact("insert into refaccion_usada(id_servicio,id_refaccion,cantidad) values("+cont+",'"+rs.getString(1)+"',"+modelo1.getElementAt(i)+")");
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(null, ex);
+                    }
+                }
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, e);
             }
             
-            for (int i=0;i<modelo.getSize();i++){
-                try {
-                    ResultSet rs = con.st.executeQuery("select id_refaccion from refacciones where nombre='"+modelo.getElementAt(i)+"'");
-                    rs.last();
-                    con.insertaryact("insert into refaccion_usada(id_servicio,id_refaccion,cantidad) values("+cont+",'"+rs.getString(1)+"',"+modelo1.getElementAt(i)+")");
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-            }
         }
        
     }//GEN-LAST:event_insertarserviciosActionPerformed
