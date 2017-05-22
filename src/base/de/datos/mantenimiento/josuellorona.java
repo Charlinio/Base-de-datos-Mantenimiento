@@ -32,6 +32,7 @@ public class josuellorona extends javax.swing.JFrame {
         pedidos();
         automovil();
         clientes();
+        refacciones();
         comboClientes();
         comboRefaccion();
     }
@@ -49,13 +50,18 @@ public class josuellorona extends javax.swing.JFrame {
     
     //TABLA AUTOMOVIL
     public void clientes(){
-        con.tabla("Select * from clientes",tablaclientes.getModel());
+        con.tabla("Select * from clientes;",tablaclientes.getModel());
+    }
+    
+    //TABLA REFACCIONES
+    public void refacciones(){
+        con.tabla("Select * from refacciones;", tablarefacciones.getModel());
     }
     
     //CAPTURAR CLIENTES PARA AGREGARLOS AL COMBOBOX
     public void comboClientes(){
         try {
-            ResultSet rs = con.st.executeQuery("select concat(nombre,' ',app,' ',apm) from clientes");
+            ResultSet rs = con.st.executeQuery("select concat(nombre,' ',app,' ',apm) from clientes;");
             while(rs.next()){
                 cmbcliente.addItem(rs.getString(1));
             }
@@ -77,7 +83,7 @@ public class josuellorona extends javax.swing.JFrame {
     //CAPTURAR REFACCIONES PARA AGREGARLAS AL COMBOBOX
     private void comboRefaccion(){
       try {
-          ResultSet rs = con.st.executeQuery("select nombre from refacciones");
+          ResultSet rs = con.st.executeQuery("select nombre from refacciones;");
           while(rs.next()){
               pcmbrefaccion.addItem(rs.getString(1));
           }
@@ -89,7 +95,7 @@ public class josuellorona extends javax.swing.JFrame {
     //CAPTURAR ID DE LA REFACCION
     private void idRefaccion(){
       try {
-          ResultSet rs = con.st.executeQuery("select id_refaccion from refacciones where nombre = '"+pcmbrefaccion.getSelectedItem()+"'");
+          ResultSet rs = con.st.executeQuery("select id_refaccion from refacciones where nombre = '"+pcmbrefaccion.getSelectedItem()+"';");
           rs.last();
           idRefaccion = rs.getString(1);
       } catch (SQLException ex) {
@@ -129,13 +135,15 @@ public class josuellorona extends javax.swing.JFrame {
         modificarautomovil = new javax.swing.JButton();
         eliminarautomovil = new javax.swing.JButton();
         panelrefacciones = new javax.swing.JPanel();
+        rtxtidrefaccion = new javax.swing.JTextField();
+        rtxtcantidad = new javax.swing.JTextField();
+        rtxtcosto = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        jTextField13 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<String>();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
+        tablarefacciones = new javax.swing.JTable();
+        rtxtnombre = new javax.swing.JTextField();
+        btnInsertarRefaccion = new javax.swing.JButton();
+        btnModificarRefaccion = new javax.swing.JButton();
+        btnEliminarRefaccion = new javax.swing.JButton();
         panelingresos = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -228,8 +236,8 @@ public class josuellorona extends javax.swing.JFrame {
         panelpedidosLayout.setHorizontalGroup(
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpedidosLayout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE))
             .addGroup(panelpedidosLayout.createSequentialGroup()
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelpedidosLayout.createSequentialGroup()
@@ -381,7 +389,19 @@ public class josuellorona extends javax.swing.JFrame {
 
         tab5.addTab("Automovil", panelautomovil);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        rtxtidrefaccion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rtxtidrefaccion.setForeground(new java.awt.Color(153, 153, 153));
+        rtxtidrefaccion.setText("Id_Refaccion");
+
+        rtxtcantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rtxtcantidad.setForeground(new java.awt.Color(153, 153, 153));
+        rtxtcantidad.setText("Cantidad");
+
+        rtxtcosto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rtxtcosto.setForeground(new java.awt.Color(153, 153, 153));
+        rtxtcosto.setText("Costo");
+
+        tablarefacciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -392,28 +412,30 @@ public class josuellorona extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable5.setPreferredSize(new java.awt.Dimension(320, 64));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tablarefacciones);
 
-        jTextField13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField13.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField13.setText("Num. Serie");
+        rtxtnombre.setText("Nombre");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(153, 153, 153));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
+        btnInsertarRefaccion.setText("Insertar");
+        btnInsertarRefaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarRefaccionActionPerformed(evt);
+            }
+        });
 
-        jTextField16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField16.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField16.setText("Nombre");
+        btnModificarRefaccion.setText("Modificar");
+        btnModificarRefaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarRefaccionActionPerformed(evt);
+            }
+        });
 
-        jTextField17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField17.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField17.setText("Modelo");
-
-        jTextField18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField18.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField18.setText("Id_Vehiculo");
+        btnEliminarRefaccion.setText("Eliminar");
+        btnEliminarRefaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarRefaccionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelrefaccionesLayout = new javax.swing.GroupLayout(panelrefacciones);
         panelrefacciones.setLayout(panelrefaccionesLayout);
@@ -421,32 +443,46 @@ public class josuellorona extends javax.swing.JFrame {
             panelrefaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelrefaccionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelrefaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelrefaccionesLayout.createSequentialGroup()
+                        .addComponent(rtxtidrefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rtxtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rtxtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rtxtcosto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(247, 247, 247))
+                    .addGroup(panelrefaccionesLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5)
+                        .addContainerGap())
+                    .addGroup(panelrefaccionesLayout.createSequentialGroup()
+                        .addComponent(btnInsertarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelrefaccionesLayout.setVerticalGroup(
             panelrefaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelrefaccionesLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(panelrefaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField17)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rtxtcosto, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(rtxtcantidad, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rtxtidrefaccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rtxtnombre))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelrefaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnInsertarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        tab5.addTab("Refacciones", panelrefacciones);
+        tab5.addTab("Refacciones y Consumibles", panelrefacciones);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
@@ -763,6 +799,19 @@ public class josuellorona extends javax.swing.JFrame {
         amodelo.setText(tablautomovil.getValueAt(fila,4).toString());
     }//GEN-LAST:event_tablautomovilMouseClicked
 
+    private void btnInsertarRefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarRefaccionActionPerformed
+        con.insertaryact("insert into refacciones values('"+rtxtidrefaccion.getText()+"','"+rtxtnombre.getText()+"',"+rtxtcantidad.getText()+","+rtxtcosto.getText()+");");
+        refacciones();
+    }//GEN-LAST:event_btnInsertarRefaccionActionPerformed
+
+    private void btnModificarRefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarRefaccionActionPerformed
+        con.insertaryact("update refacciones set nombre=");
+    }//GEN-LAST:event_btnModificarRefaccionActionPerformed
+
+    private void btnEliminarRefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRefaccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarRefaccionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -805,8 +854,11 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JTextField anombre;
     private javax.swing.JTextField anumserie;
     private javax.swing.JButton btnEliminarPedidos;
+    private javax.swing.JButton btnEliminarRefaccion;
     private javax.swing.JButton btnInsertarPedidos;
+    private javax.swing.JButton btnInsertarRefaccion;
     private javax.swing.JButton btnModificarPedidos;
+    private javax.swing.JButton btnModificarRefaccion;
     private javax.swing.JPanel clientes;
     private javax.swing.JComboBox<String> cmbcliente;
     private javax.swing.JButton eliminarautomovil;
@@ -814,7 +866,6 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField fechapedido;
     private javax.swing.JTextField idpedido;
     private javax.swing.JButton insertarautomovil;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
@@ -826,14 +877,9 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
@@ -853,9 +899,14 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JPanel panelservicios;
     private javax.swing.JTextField pcantidad;
     private javax.swing.JComboBox pcmbrefaccion;
+    private javax.swing.JTextField rtxtcantidad;
+    private javax.swing.JTextField rtxtcosto;
+    private javax.swing.JTextField rtxtidrefaccion;
+    private javax.swing.JTextField rtxtnombre;
     private javax.swing.JTabbedPane tab5;
     private javax.swing.JTable tablaclientes;
     private javax.swing.JTable tablapedidos;
+    private javax.swing.JTable tablarefacciones;
     private javax.swing.JTable tablautomovil;
     // End of variables declaration//GEN-END:variables
 }
