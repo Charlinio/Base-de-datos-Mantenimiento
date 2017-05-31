@@ -40,7 +40,9 @@ public class Reportes {
     private static PdfPCell c1(Font font) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-        public void generarReporte(){
+    
+    
+        public  void generarReporte(){
             try {
                 JFileChooser fileChooser = new JFileChooser();
                 if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -56,6 +58,7 @@ public class Reportes {
                         addTitlePage(document);
                         //addContent(document);
                         document.close();
+                        
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null,e.getMessage());
                 }
@@ -66,7 +69,7 @@ public class Reportes {
                 document.addSubject("Reporte de Pedidos");
                
         }
-
+        
         private static void addTitlePage(Document repedido) throws DocumentException {
                 Paragraph preface = new Paragraph();
                 addEmptyLine(preface, 1);
@@ -79,12 +82,7 @@ public class Reportes {
                                 "Reporte de Pedidos"+ " , "+ new Date(), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                                 smallBold));
                 addEmptyLine(preface, 3);
-                //addEmptyLine(preface, 5);
-
-               // preface.add(new Paragraph(
-                             //   "This document is a preliminary version and not subject to your license agreement or any other agreement with vogella.com ;-).",
-                              //  redFont));
-                PdfPTable table = new PdfPTable(5);
+                PdfPTable table = new PdfPTable(4);
                 PdfPCell c1 = new PdfPCell();
                 
                 
@@ -115,12 +113,18 @@ public class Reportes {
                 table.setHeaderRows(1);
                 
                 int[] row = josuellorona.tablapedidos.getSelectedRows();
+                
               for(int i =0;i<josuellorona.tablapedidos.getRowCount();i++){
                     for(int j =0;j< josuellorona.tablapedidos.getColumnCount();j++){
+                        if(josuellorona.tablapedidos.getSelectedRowCount()>0){
                         if(josuellorona.tablapedidos.getValueAt(row[i], j) != null){
                 table.addCell(new Phrase(josuellorona.tablapedidos.getValueAt(row[i], j).toString()));
                     }
-                    }
+                    }else{
+                            
+                        JOptionPane.showMessageDialog(null, "Seleccione un Producto para Crear un Reporte","Advertencia",JOptionPane.WARNING_MESSAGE);
+                        }
+                        }
                 }
                 
 
@@ -129,10 +133,13 @@ public class Reportes {
                 repedido.add(table);
                 repedido.newPage();
         }
-
-     private static void addEmptyLine(Paragraph paragraph, int number) {
+        
+         private static void addEmptyLine(Paragraph paragraph, int number) {
                 for (int i = 0; i < number; i++) {
                         paragraph.add(new Paragraph(" "));
                 }
-        }
 }
+}
+
+    
+        
