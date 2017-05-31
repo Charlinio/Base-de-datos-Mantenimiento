@@ -579,6 +579,8 @@
                               <Component id="btnModificarPedidos" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnEliminarPedidos" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnre" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
@@ -593,7 +595,7 @@
                               <Component id="pcantidad" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="589" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -615,6 +617,7 @@
                           <Component id="btnInsertarPedidos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnEliminarPedidos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnModificarPedidos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnre" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="300" max="-2" attributes="0"/>
@@ -641,10 +644,14 @@
                         <Column editable="true" title="Title 4" type="java.lang.Object"/>
                       </Table>
                     </Property>
+                    <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablapedidosMouseClicked"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -735,6 +742,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cantidad"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reporte"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnreActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

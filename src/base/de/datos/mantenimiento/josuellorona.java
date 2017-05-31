@@ -186,7 +186,7 @@ public class josuellorona extends javax.swing.JFrame {
         anombre = new javax.swing.JTextField();
         amodelo = new javax.swing.JTextField();
         aidvehiculo = new javax.swing.JTextField();
-        cmbcliente = new javax.swing.JComboBox<String>();
+        cmbcliente = new javax.swing.JComboBox<>();
         insertarautomovil = new javax.swing.JButton();
         modificarautomovil = new javax.swing.JButton();
         eliminarautomovil = new javax.swing.JButton();
@@ -211,21 +211,22 @@ public class josuellorona extends javax.swing.JFrame {
         pcmbrefaccion = new javax.swing.JComboBox();
         fechapedido = new javax.swing.JFormattedTextField();
         pcantidad = new javax.swing.JTextField();
+        btnre = new javax.swing.JButton();
         panelservicios = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tablaservicios = new javax.swing.JTable();
         nombreserv = new javax.swing.JTextField();
         fechaserv = new javax.swing.JFormattedTextField();
         costoserv = new javax.swing.JTextField();
-        refaccionserv = new javax.swing.JComboBox<String>();
+        refaccionserv = new javax.swing.JComboBox<>();
         descserv = new javax.swing.JTextField();
         insertarservicios = new javax.swing.JButton();
         btnModificarServicio = new javax.swing.JButton();
         btnEliminarServicio = new javax.swing.JButton();
         btnAgregarRefaccion = new javax.swing.JButton();
-        autoidserv = new javax.swing.JComboBox<String>();
-        idempleadoserv = new javax.swing.JComboBox<String>();
-        clienteserv = new javax.swing.JComboBox<String>();
+        autoidserv = new javax.swing.JComboBox<>();
+        idempleadoserv = new javax.swing.JComboBox<>();
+        clienteserv = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         modelo = new DefaultListModel();
@@ -394,7 +395,7 @@ public class josuellorona extends javax.swing.JFrame {
 
         cmbcliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cmbcliente.setForeground(new java.awt.Color(153, 153, 153));
-        cmbcliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
+        cmbcliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente" }));
 
         insertarautomovil.setText("Insertar");
         insertarautomovil.addActionListener(new java.awt.event.ActionListener() {
@@ -577,6 +578,7 @@ public class josuellorona extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablapedidos.setColumnSelectionAllowed(true);
         tablapedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablapedidosMouseClicked(evt);
@@ -630,6 +632,13 @@ public class josuellorona extends javax.swing.JFrame {
         pcantidad.setForeground(new java.awt.Color(153, 153, 153));
         pcantidad.setText("Cantidad");
 
+        btnre.setText("Reporte");
+        btnre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelpedidosLayout = new javax.swing.GroupLayout(panelpedidos);
         panelpedidos.setLayout(panelpedidosLayout);
         panelpedidosLayout.setHorizontalGroup(
@@ -645,7 +654,9 @@ public class josuellorona extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminarPedidos))
+                        .addComponent(btnEliminarPedidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnre))
                     .addGroup(panelpedidosLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(idpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -657,7 +668,7 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(pcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(589, Short.MAX_VALUE))
         );
         panelpedidosLayout.setVerticalGroup(
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,7 +685,8 @@ public class josuellorona extends javax.swing.JFrame {
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsertarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -719,7 +731,7 @@ public class josuellorona extends javax.swing.JFrame {
 
         refaccionserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         refaccionserv.setForeground(new java.awt.Color(153, 153, 153));
-        refaccionserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Refaccion" }));
+        refaccionserv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Refaccion" }));
 
         descserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         descserv.setForeground(new java.awt.Color(153, 153, 153));
@@ -756,15 +768,15 @@ public class josuellorona extends javax.swing.JFrame {
 
         autoidserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         autoidserv.setForeground(new java.awt.Color(153, 153, 153));
-        autoidserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Auto_id" }));
+        autoidserv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Auto_id" }));
 
         idempleadoserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         idempleadoserv.setForeground(new java.awt.Color(153, 153, 153));
-        idempleadoserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id_empleado", "E001" }));
+        idempleadoserv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id_empleado", "E001" }));
 
         clienteserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         clienteserv.setForeground(new java.awt.Color(153, 153, 153));
-        clienteserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
+        clienteserv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente" }));
 
         jButton6.setText("Quitar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -806,11 +818,9 @@ public class josuellorona extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(panelserviciosLayout.createSequentialGroup()
-                                .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)))
+                                .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(descserv)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -851,12 +861,11 @@ public class josuellorona extends javax.swing.JFrame {
                                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(btnAgregarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(descserv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(descserv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelserviciosLayout.createSequentialGroup()
                                 .addGap(38, 38, 38)
-                                .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(insertarservicios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1173,6 +1182,12 @@ public class josuellorona extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void btnreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreActionPerformed
+        // TODO add your handling code here:
+        Reportes re = new Reportes();
+        re.generarReporte();
+    }//GEN-LAST:event_btnreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1227,6 +1242,7 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarPedidos;
     private javax.swing.JButton btnModificarRefaccion;
     private javax.swing.JButton btnModificarServicio;
+    private javax.swing.JButton btnre;
     private javax.swing.JPanel clientes;
     private javax.swing.JComboBox<String> clienteserv;
     private javax.swing.JComboBox<String> cmbcliente;
@@ -1280,7 +1296,7 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tab5;
     private javax.swing.JTable tablaclientes;
     private javax.swing.JTable tablaingresos;
-    private javax.swing.JTable tablapedidos;
+    public static javax.swing.JTable tablapedidos;
     private javax.swing.JTable tablarefacciones;
     private javax.swing.JTable tablaservicios;
     private javax.swing.JTable tablautomovil;
