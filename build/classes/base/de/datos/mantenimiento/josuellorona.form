@@ -1093,11 +1093,13 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="insertarservicios" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="btnModificarServicio" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="btnEliminarServicio" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnserre1" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="insertarservicios" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="btnModificarServicio" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="btnEliminarServicio" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Component id="jScrollPane9" alignment="0" max="32767" attributes="0"/>
@@ -1475,12 +1477,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace pref="30" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jTextField4" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnrein" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jTextField1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jTextField2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jFormattedTextField1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jTextField4" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="334" max="-2" attributes="0"/>

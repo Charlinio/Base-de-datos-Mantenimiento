@@ -82,7 +82,7 @@ public class Reportes {
                                 "Reporte de Pedidos"+ " , "+ new Date(), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                                 smallBold));
                 addEmptyLine(preface, 3);
-                PdfPTable table = new PdfPTable(4);
+                PdfPTable table = new PdfPTable(5);
                 PdfPCell c1 = new PdfPCell();
                 
                 
