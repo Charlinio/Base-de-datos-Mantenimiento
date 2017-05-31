@@ -5,6 +5,7 @@
  */
 package base.de.datos.mantenimiento;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,6 +43,28 @@ public class josuellorona extends javax.swing.JFrame {
         comboAuto();
         ingresos();
         servicios();
+        
+        for(int i=0;i<tablaclientes.getColumnCount();i++){
+            tablaclientes.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
+        }  
+                
+        for(int i=0;i<tablautomovil.getColumnCount();i++){
+            tablautomovil.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
+        }  
+        for(int i=0;i<tablarefacciones.getColumnCount();i++){
+            tablarefacciones.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
+        }  
+        for(int i=0;i<tablapedidos.getColumnCount();i++){
+            tablapedidos.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
+        }  
+        for(int i=0;i<tablaservicios.getColumnCount();i++){
+            tablaservicios.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
+        }  
+        for(int i=0;i<tablaingresos.getColumnCount();i++){
+            tablaingresos.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
+        }  
+       
+        
     }
     
     //TABLA PEDIDOS
@@ -245,6 +268,9 @@ public class josuellorona extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        clientes.setBackground(new java.awt.Color(0, 109, 123));
+
+        tablaclientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaclientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -263,30 +289,37 @@ public class josuellorona extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(tablaclientes);
 
+        ctxtidcliente.setBackground(new java.awt.Color(102, 102, 102));
         ctxtidcliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ctxtidcliente.setForeground(new java.awt.Color(153, 153, 153));
         ctxtidcliente.setText("Id_cliente");
 
+        ctxtnombre.setBackground(new java.awt.Color(102, 102, 102));
         ctxtnombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ctxtnombre.setForeground(new java.awt.Color(153, 153, 153));
         ctxtnombre.setText("Nombre");
 
+        ctxtapp.setBackground(new java.awt.Color(102, 102, 102));
         ctxtapp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ctxtapp.setForeground(new java.awt.Color(153, 153, 153));
         ctxtapp.setText("App");
 
+        ctxtapm.setBackground(new java.awt.Color(102, 102, 102));
         ctxtapm.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ctxtapm.setForeground(new java.awt.Color(153, 153, 153));
         ctxtapm.setText("Apm");
 
+        ctxttelefono.setBackground(new java.awt.Color(102, 102, 102));
         ctxttelefono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ctxttelefono.setForeground(new java.awt.Color(153, 153, 153));
         ctxttelefono.setText("Telefono");
 
+        ctxtcorreo.setBackground(new java.awt.Color(102, 102, 102));
         ctxtcorreo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ctxtcorreo.setForeground(new java.awt.Color(153, 153, 153));
         ctxtcorreo.setText("Correo");
 
+        btnInsertarCliente.setBackground(new java.awt.Color(255, 255, 255));
         btnInsertarCliente.setText("Insertar");
         btnInsertarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,6 +327,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnModificarCliente.setBackground(new java.awt.Color(255, 255, 255));
         btnModificarCliente.setText("Modificar");
         btnModificarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,6 +335,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarCliente.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminarCliente.setText("Eliminar");
         btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +347,7 @@ public class josuellorona extends javax.swing.JFrame {
         clientes.setLayout(clientesLayout);
         clientesLayout.setHorizontalGroup(
             clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1124, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1136, Short.MAX_VALUE)
             .addGroup(clientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,7 +369,7 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(btnModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
         clientesLayout.setVerticalGroup(
             clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,6 +394,8 @@ public class josuellorona extends javax.swing.JFrame {
 
         tab5.addTab("Clientes", clientes);
 
+        panelautomovil.setBackground(new java.awt.Color(0, 109, 123));
+
         tablautomovil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -377,26 +414,32 @@ public class josuellorona extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablautomovil);
 
+        anumserie.setBackground(new java.awt.Color(102, 102, 102));
         anumserie.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         anumserie.setForeground(new java.awt.Color(153, 153, 153));
         anumserie.setText("Num. Serie");
 
+        anombre.setBackground(new java.awt.Color(102, 102, 102));
         anombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         anombre.setForeground(new java.awt.Color(153, 153, 153));
         anombre.setText("Nombre");
 
+        amodelo.setBackground(new java.awt.Color(102, 102, 102));
         amodelo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         amodelo.setForeground(new java.awt.Color(153, 153, 153));
         amodelo.setText("Modelo");
 
+        aidvehiculo.setBackground(new java.awt.Color(102, 102, 102));
         aidvehiculo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         aidvehiculo.setForeground(new java.awt.Color(153, 153, 153));
         aidvehiculo.setText("Id_Vehiculo");
 
+        cmbcliente.setBackground(new java.awt.Color(102, 102, 102));
         cmbcliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cmbcliente.setForeground(new java.awt.Color(153, 153, 153));
         cmbcliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
 
+        insertarautomovil.setBackground(new java.awt.Color(255, 255, 255));
         insertarautomovil.setText("Insertar");
         insertarautomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,6 +447,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        modificarautomovil.setBackground(new java.awt.Color(255, 255, 255));
         modificarautomovil.setText("Modificar");
         modificarautomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,6 +455,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        eliminarautomovil.setBackground(new java.awt.Color(255, 255, 255));
         eliminarautomovil.setText("Eliminar");
         eliminarautomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,7 +487,7 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(amodelo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(aidvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(393, Short.MAX_VALUE))
         );
         panelautomovilLayout.setVerticalGroup(
             panelautomovilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,14 +510,19 @@ public class josuellorona extends javax.swing.JFrame {
 
         tab5.addTab("Automovil", panelautomovil);
 
+        panelrefacciones.setBackground(new java.awt.Color(0, 109, 123));
+
+        rtxtidrefaccion.setBackground(new java.awt.Color(102, 102, 102));
         rtxtidrefaccion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rtxtidrefaccion.setForeground(new java.awt.Color(153, 153, 153));
         rtxtidrefaccion.setText("Id_Refaccion");
 
+        rtxtcantidad.setBackground(new java.awt.Color(102, 102, 102));
         rtxtcantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rtxtcantidad.setForeground(new java.awt.Color(153, 153, 153));
         rtxtcantidad.setText("Cantidad");
 
+        rtxtcosto.setBackground(new java.awt.Color(102, 102, 102));
         rtxtcosto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rtxtcosto.setForeground(new java.awt.Color(153, 153, 153));
         rtxtcosto.setText("Costo");
@@ -495,10 +545,12 @@ public class josuellorona extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tablarefacciones);
 
+        rtxtnombre.setBackground(new java.awt.Color(102, 102, 102));
         rtxtnombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rtxtnombre.setForeground(new java.awt.Color(153, 153, 153));
         rtxtnombre.setText("Nombre");
 
+        btnInsertarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
         btnInsertarRefaccion.setText("Insertar");
         btnInsertarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -506,6 +558,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnModificarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
         btnModificarRefaccion.setText("Modificar");
         btnModificarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -513,6 +566,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminarRefaccion.setText("Eliminar");
         btnEliminarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -567,6 +621,8 @@ public class josuellorona extends javax.swing.JFrame {
 
         tab5.addTab("Refacciones y Consumibles", panelrefacciones);
 
+        panelpedidos.setBackground(new java.awt.Color(0, 109, 123));
+
         tablapedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -586,15 +642,20 @@ public class josuellorona extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablapedidos);
 
+        idpedido.setEditable(false);
+        idpedido.setBackground(new java.awt.Color(102, 102, 102));
         idpedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         idpedido.setForeground(new java.awt.Color(153, 153, 153));
         idpedido.setText("Id Pedido");
         idpedido.setPreferredSize(new java.awt.Dimension(73, 31));
 
+        estado.setEditable(false);
+        estado.setBackground(new java.awt.Color(102, 102, 102));
         estado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         estado.setForeground(new java.awt.Color(153, 153, 153));
         estado.setText("Estado");
 
+        btnInsertarPedidos.setBackground(new java.awt.Color(255, 255, 255));
         btnInsertarPedidos.setText("Insertar");
         btnInsertarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -602,6 +663,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnModificarPedidos.setBackground(new java.awt.Color(255, 255, 255));
         btnModificarPedidos.setText("Modificar");
         btnModificarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -609,6 +671,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarPedidos.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminarPedidos.setText("Eliminar");
         btnEliminarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -616,10 +679,13 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        pcmbrefaccion.setBackground(new java.awt.Color(102, 102, 102));
         pcmbrefaccion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pcmbrefaccion.setForeground(new java.awt.Color(153, 153, 153));
         pcmbrefaccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Refaccion" }));
 
+        fechapedido.setEditable(false);
+        fechapedido.setBackground(new java.awt.Color(102, 102, 102));
         fechapedido.setForeground(new java.awt.Color(153, 153, 153));
         try {
             fechapedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
@@ -628,10 +694,13 @@ public class josuellorona extends javax.swing.JFrame {
         }
         fechapedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        pcantidad.setEditable(false);
+        pcantidad.setBackground(new java.awt.Color(102, 102, 102));
         pcantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pcantidad.setForeground(new java.awt.Color(153, 153, 153));
         pcantidad.setText("Cantidad");
 
+        btnre.setBackground(new java.awt.Color(255, 255, 255));
         btnre.setText("Reporte");
         btnre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -645,7 +714,7 @@ public class josuellorona extends javax.swing.JFrame {
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpedidosLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1122, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE))
             .addGroup(panelpedidosLayout.createSequentialGroup()
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelpedidosLayout.createSequentialGroup()
@@ -668,7 +737,7 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(pcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(415, Short.MAX_VALUE))
+                .addContainerGap(427, Short.MAX_VALUE))
         );
         panelpedidosLayout.setVerticalGroup(
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -694,6 +763,8 @@ public class josuellorona extends javax.swing.JFrame {
 
         tab5.addTab("Pedidos", panelpedidos);
 
+        panelservicios.setBackground(new java.awt.Color(0, 109, 123));
+
         tablaservicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -712,10 +783,12 @@ public class josuellorona extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(tablaservicios);
 
+        nombreserv.setBackground(new java.awt.Color(102, 102, 102));
         nombreserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nombreserv.setForeground(new java.awt.Color(153, 153, 153));
         nombreserv.setText("Nombre");
 
+        fechaserv.setBackground(new java.awt.Color(102, 102, 102));
         fechaserv.setForeground(new java.awt.Color(153, 153, 153));
         try {
             fechaserv.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
@@ -725,19 +798,23 @@ public class josuellorona extends javax.swing.JFrame {
         fechaserv.setCaretColor(new java.awt.Color(153, 153, 153));
         fechaserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        costoserv.setBackground(new java.awt.Color(102, 102, 102));
         costoserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         costoserv.setForeground(new java.awt.Color(153, 153, 153));
         costoserv.setText("Costo");
 
+        refaccionserv.setBackground(new java.awt.Color(102, 102, 102));
         refaccionserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         refaccionserv.setForeground(new java.awt.Color(153, 153, 153));
         refaccionserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Refaccion" }));
 
+        descserv.setBackground(new java.awt.Color(204, 204, 204));
         descserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         descserv.setForeground(new java.awt.Color(153, 153, 153));
         descserv.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         descserv.setText("Descripcion");
 
+        insertarservicios.setBackground(new java.awt.Color(255, 255, 255));
         insertarservicios.setText("Insertar");
         insertarservicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -745,6 +822,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnModificarServicio.setBackground(new java.awt.Color(255, 255, 255));
         btnModificarServicio.setText("Modificar");
         btnModificarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -752,6 +830,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarServicio.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminarServicio.setText("Eliminar");
         btnEliminarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -759,6 +838,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        btnAgregarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
         btnAgregarRefaccion.setText("Agregar");
         btnAgregarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -766,18 +846,22 @@ public class josuellorona extends javax.swing.JFrame {
             }
         });
 
+        autoidserv.setBackground(new java.awt.Color(102, 102, 102));
         autoidserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         autoidserv.setForeground(new java.awt.Color(153, 153, 153));
         autoidserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Auto_id" }));
 
+        idempleadoserv.setBackground(new java.awt.Color(102, 102, 102));
         idempleadoserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         idempleadoserv.setForeground(new java.awt.Color(153, 153, 153));
         idempleadoserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id_empleado", "E001" }));
 
+        clienteserv.setBackground(new java.awt.Color(102, 102, 102));
         clienteserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         clienteserv.setForeground(new java.awt.Color(153, 153, 153));
         clienteserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
 
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Quitar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -786,11 +870,18 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         listaRefacciones.setModel(modelo);
+        listaRefacciones.setBackground(new java.awt.Color(204, 204, 204));
+        listaRefacciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jScrollPane4.setViewportView(listaRefacciones);
 
+        txtcantidadserv.setBackground(new java.awt.Color(102, 102, 102));
+        txtcantidadserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtcantidadserv.setForeground(new java.awt.Color(153, 153, 153));
         txtcantidadserv.setText("Cantidad");
 
         listaRefacciones1.setModel(modelo1);
+        listaRefacciones1.setBackground(new java.awt.Color(204, 204, 204));
+        listaRefacciones1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jScrollPane9.setViewportView(listaRefacciones1);
 
         javax.swing.GroupLayout panelserviciosLayout = new javax.swing.GroupLayout(panelservicios);
@@ -879,14 +970,19 @@ public class josuellorona extends javax.swing.JFrame {
 
         tab5.addTab("Servicios", panelservicios);
 
+        panelingresos.setBackground(new java.awt.Color(0, 109, 123));
+
+        jTextField1.setBackground(new java.awt.Color(102, 102, 102));
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("Id Ingreso");
 
+        jTextField2.setBackground(new java.awt.Color(102, 102, 102));
         jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(153, 153, 153));
         jTextField2.setText("Ingreso");
 
+        jTextField4.setBackground(new java.awt.Color(102, 102, 102));
         jTextField4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(153, 153, 153));
         jTextField4.setText("Servicio");
@@ -904,6 +1000,7 @@ public class josuellorona extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaingresos);
 
+        jFormattedTextField1.setBackground(new java.awt.Color(102, 102, 102));
         jFormattedTextField1.setForeground(new java.awt.Color(153, 153, 153));
         try {
             jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -927,7 +1024,7 @@ public class josuellorona extends javax.swing.JFrame {
                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addContainerGap(577, Short.MAX_VALUE))
         );
         panelingresosLayout.setVerticalGroup(
             panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -948,7 +1045,7 @@ public class josuellorona extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab5, javax.swing.GroupLayout.PREFERRED_SIZE, 1129, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tab5, javax.swing.GroupLayout.PREFERRED_SIZE, 1141, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
