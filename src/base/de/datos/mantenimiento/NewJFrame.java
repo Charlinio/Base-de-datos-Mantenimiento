@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 
 /**
@@ -23,7 +24,7 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    
+    public static String empleado= null;
     Conexion con = new Conexion();
     public NewJFrame() {
         initComponents();
@@ -83,10 +84,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             Statement st = con.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = st.executeQuery("SELECT * FROM empleados WHERE CORREO_ELECTRONICO = '"+txtUsuario.getText()+"' and PASS='"+txtPass.getText()+"'");
+            ResultSet rs = st.executeQuery("SELECT concat(nombre_empleado,' ',apellido_paterno,' ',apellido_materno) FROM empleados WHERE CORREO_ELECTRONICO = '"+txtUsuario.getText()+"' and PASS='"+txtPass.getText()+"'");
             rs.last();
             int encontro = rs.getRow();
             if(encontro==1){
+                empleado = rs.getString(1);
                 new josuellorona().setVisible(true);
                 this.dispose();
             }else{
@@ -108,12 +110,7 @@ public class NewJFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+        UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

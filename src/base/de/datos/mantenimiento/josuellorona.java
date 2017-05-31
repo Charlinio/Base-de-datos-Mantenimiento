@@ -43,59 +43,58 @@ public class josuellorona extends javax.swing.JFrame {
         comboAuto();
         ingresos();
         servicios();
-        
-        for(int i=0;i<tablaclientes.getColumnCount();i++){
-            tablaclientes.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
-        }  
-                
-        for(int i=0;i<tablautomovil.getColumnCount();i++){
-            tablautomovil.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
-        }  
-        for(int i=0;i<tablarefacciones.getColumnCount();i++){
-            tablarefacciones.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
-        }  
-        for(int i=0;i<tablapedidos.getColumnCount();i++){
-            tablapedidos.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
-        }  
-        for(int i=0;i<tablaservicios.getColumnCount();i++){
-            tablaservicios.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
-        }  
-        for(int i=0;i<tablaingresos.getColumnCount();i++){
-            tablaingresos.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.darkGray,Color.WHITE));
-        }  
-       
-        
+        //this.getContentPane().setBackground(Color.black);
+        lblEmpleado.setText(NewJFrame.empleado);
+        empleado();
     }
     
     //TABLA PEDIDOS
     private void pedidos (){
         con.tabla("Select p.id_pedido, nombre, p.fecha_pedido, p.estado, p.cantidad from pedidos as p, refacciones where p.refaccion = refacciones.id_refaccion",tablapedidos.getModel());
+        for(int i=0;i<tablapedidos.getColumnCount();i++){
+            tablapedidos.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.black,Color.WHITE));
+        }  
     }
     
     //TABLA AUTOMOVIL
     private void automovil(){
         con.tabla("select a.ID_AUTO,a.VIN,concat(c.nombre, ' ', c.app, ' ', c.apm) as CLIENTE, a.nombre, a.modelo from automovil as a,clientes as c\n" +
         "where a.CLIENTE = c.id_cliente;",tablautomovil.getModel());
+        for(int i=0;i<tablautomovil.getColumnCount();i++){
+            tablautomovil.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.black,Color.WHITE));
+        }  
     }
     
     //TABLA AUTOMOVIL
     private void clientes(){
         con.tabla("Select * from clientes;",tablaclientes.getModel());
+        for(int i=0;i<tablaclientes.getColumnCount();i++){
+            tablaclientes.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.black,Color.WHITE));
+        }  
     }
     
     //TABLA REFACCIONES
     private void refacciones(){
-        con.tabla("Select * from refacciones;", tablarefacciones.getModel());
+        con.tabla("Select * from refacciones;", tablarefacciones.getModel());        
+        for(int i=0;i<tablarefacciones.getColumnCount();i++){
+            tablarefacciones.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.black,Color.WHITE));
+        }  
     }
     
     //TABLA INGRESOS
     private void ingresos(){
         con.tabla("select * from ingresos;", tablaingresos.getModel());
+        for(int i=0;i<tablaingresos.getColumnCount();i++){
+            tablaingresos.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.black,Color.WHITE));
+        }  
     }
     
     //TABLA SERVICIOS
     private void servicios(){
         con.tabla("select * from servicio;", tablaservicios.getModel());
+        for(int i=0;i<tablaservicios.getColumnCount();i++){
+            tablaservicios.getColumnModel().getColumn(i).setHeaderRenderer(new RendererTabla(Color.black,Color.WHITE));
+        }  
     }
     
     //CAPTURAR CLIENTES PARA AGREGARLOS AL COMBOBOX
@@ -177,6 +176,15 @@ public class josuellorona extends javax.swing.JFrame {
       }
     }
     
+    private void empleado(){
+      try {
+          ResultSet rs = con.st.executeQuery("select id_empleado from empleados where concat(nombre_empleado,' ',apellido_paterno,' ',apellido_materno)='"+lblEmpleado.getText()+"'");
+          rs.last();
+          lblId.setText(rs.getString(1));
+      } catch (SQLException ex) {
+          JOptionPane.showMessageDialog(null, ex);
+      }
+    }
     
     
     
@@ -235,14 +243,6 @@ public class josuellorona extends javax.swing.JFrame {
         fechapedido = new javax.swing.JFormattedTextField();
         pcantidad = new javax.swing.JTextField();
         btnre = new javax.swing.JButton();
-        panelingresos = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaingresos = new javax.swing.JTable();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        btnrein = new javax.swing.JButton();
         panelservicios = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tablaservicios = new javax.swing.JTable();
@@ -256,7 +256,6 @@ public class josuellorona extends javax.swing.JFrame {
         btnEliminarServicio = new javax.swing.JButton();
         btnAgregarRefaccion = new javax.swing.JButton();
         autoidserv = new javax.swing.JComboBox<String>();
-        idempleadoserv = new javax.swing.JComboBox<String>();
         clienteserv = new javax.swing.JComboBox<String>();
         jButton6 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -267,12 +266,26 @@ public class josuellorona extends javax.swing.JFrame {
         modelo1 = new DefaultListModel();
         listaRefacciones1 = new javax.swing.JList();
         btnserre1 = new javax.swing.JButton();
+        panelingresos = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaingresos = new javax.swing.JTable();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        btnrein = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lblEmpleado = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 109, 123));
+        setUndecorated(true);
 
         clientes.setBackground(new java.awt.Color(0, 109, 123));
 
-        tablaclientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablaclientes.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tablaclientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -284,6 +297,7 @@ public class josuellorona extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaclientes.setRowHeight(20);
         tablaclientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaclientesMouseClicked(evt);
@@ -322,6 +336,8 @@ public class josuellorona extends javax.swing.JFrame {
         ctxtcorreo.setText("Correo");
 
         btnInsertarCliente.setBackground(new java.awt.Color(255, 255, 255));
+        btnInsertarCliente.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnInsertarCliente.setForeground(new java.awt.Color(0, 51, 51));
         btnInsertarCliente.setText("Insertar");
         btnInsertarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,6 +346,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnModificarCliente.setBackground(new java.awt.Color(255, 255, 255));
+        btnModificarCliente.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnModificarCliente.setForeground(new java.awt.Color(0, 51, 51));
         btnModificarCliente.setText("Modificar");
         btnModificarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,6 +356,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnEliminarCliente.setBackground(new java.awt.Color(255, 255, 255));
+        btnEliminarCliente.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnEliminarCliente.setForeground(new java.awt.Color(0, 51, 51));
         btnEliminarCliente.setText("Eliminar");
         btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -398,6 +418,7 @@ public class josuellorona extends javax.swing.JFrame {
 
         panelautomovil.setBackground(new java.awt.Color(0, 109, 123));
 
+        tablautomovil.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tablautomovil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -409,6 +430,7 @@ public class josuellorona extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablautomovil.setRowHeight(20);
         tablautomovil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablautomovilMouseClicked(evt);
@@ -442,6 +464,8 @@ public class josuellorona extends javax.swing.JFrame {
         cmbcliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
 
         insertarautomovil.setBackground(new java.awt.Color(255, 255, 255));
+        insertarautomovil.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        insertarautomovil.setForeground(new java.awt.Color(0, 51, 51));
         insertarautomovil.setText("Insertar");
         insertarautomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,6 +474,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         modificarautomovil.setBackground(new java.awt.Color(255, 255, 255));
+        modificarautomovil.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        modificarautomovil.setForeground(new java.awt.Color(0, 51, 51));
         modificarautomovil.setText("Modificar");
         modificarautomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -458,6 +484,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         eliminarautomovil.setBackground(new java.awt.Color(255, 255, 255));
+        eliminarautomovil.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        eliminarautomovil.setForeground(new java.awt.Color(0, 51, 51));
         eliminarautomovil.setText("Eliminar");
         eliminarautomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -529,6 +557,7 @@ public class josuellorona extends javax.swing.JFrame {
         rtxtcosto.setForeground(new java.awt.Color(153, 153, 153));
         rtxtcosto.setText("Costo");
 
+        tablarefacciones.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tablarefacciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -540,6 +569,7 @@ public class josuellorona extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablarefacciones.setRowHeight(20);
         tablarefacciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablarefaccionesMouseClicked(evt);
@@ -553,6 +583,8 @@ public class josuellorona extends javax.swing.JFrame {
         rtxtnombre.setText("Nombre");
 
         btnInsertarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
+        btnInsertarRefaccion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnInsertarRefaccion.setForeground(new java.awt.Color(0, 51, 51));
         btnInsertarRefaccion.setText("Insertar");
         btnInsertarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -561,6 +593,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnModificarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
+        btnModificarRefaccion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnModificarRefaccion.setForeground(new java.awt.Color(0, 51, 51));
         btnModificarRefaccion.setText("Modificar");
         btnModificarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -569,6 +603,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnEliminarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
+        btnEliminarRefaccion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnEliminarRefaccion.setForeground(new java.awt.Color(0, 51, 51));
         btnEliminarRefaccion.setText("Eliminar");
         btnEliminarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -593,15 +629,13 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(rtxtcosto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(247, 247, 247))
                     .addGroup(panelrefaccionesLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5)
-                        .addContainerGap())
-                    .addGroup(panelrefaccionesLayout.createSequentialGroup()
                         .addComponent(btnInsertarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnModificarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 824, Short.MAX_VALUE))))
+            .addComponent(jScrollPane5)
         );
         panelrefaccionesLayout.setVerticalGroup(
             panelrefaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,6 +659,7 @@ public class josuellorona extends javax.swing.JFrame {
 
         panelpedidos.setBackground(new java.awt.Color(0, 109, 123));
 
+        tablapedidos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tablapedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -637,6 +672,7 @@ public class josuellorona extends javax.swing.JFrame {
             }
         ));
         tablapedidos.setColumnSelectionAllowed(true);
+        tablapedidos.setRowHeight(20);
         tablapedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablapedidosMouseClicked(evt);
@@ -658,6 +694,8 @@ public class josuellorona extends javax.swing.JFrame {
         estado.setText("Estado");
 
         btnInsertarPedidos.setBackground(new java.awt.Color(255, 255, 255));
+        btnInsertarPedidos.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnInsertarPedidos.setForeground(new java.awt.Color(0, 51, 51));
         btnInsertarPedidos.setText("Insertar");
         btnInsertarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -666,6 +704,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnModificarPedidos.setBackground(new java.awt.Color(255, 255, 255));
+        btnModificarPedidos.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnModificarPedidos.setForeground(new java.awt.Color(0, 51, 51));
         btnModificarPedidos.setText("Modificar");
         btnModificarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -674,6 +714,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnEliminarPedidos.setBackground(new java.awt.Color(255, 255, 255));
+        btnEliminarPedidos.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnEliminarPedidos.setForeground(new java.awt.Color(0, 51, 51));
         btnEliminarPedidos.setText("Eliminar");
         btnEliminarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -703,6 +745,8 @@ public class josuellorona extends javax.swing.JFrame {
         pcantidad.setText("Cantidad");
 
         btnre.setBackground(new java.awt.Color(255, 255, 255));
+        btnre.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnre.setForeground(new java.awt.Color(0, 51, 51));
         btnre.setText("Reporte");
         btnre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -714,22 +758,11 @@ public class josuellorona extends javax.swing.JFrame {
         panelpedidos.setLayout(panelpedidosLayout);
         panelpedidosLayout.setHorizontalGroup(
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpedidosLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(panelpedidosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelpedidosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnInsertarPedidos)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarPedidos)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnre))
-                    .addGroup(panelpedidosLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addComponent(idpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(pcmbrefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -738,8 +771,16 @@ public class josuellorona extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(pcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(427, Short.MAX_VALUE))
+                        .addComponent(pcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelpedidosLayout.createSequentialGroup()
+                        .addComponent(btnInsertarPedidos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnre, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(425, Short.MAX_VALUE))
         );
         panelpedidosLayout.setVerticalGroup(
             panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -752,102 +793,23 @@ public class josuellorona extends javax.swing.JFrame {
                         .addComponent(pcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pcmbrefaccion, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(idpedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInsertarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnInsertarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         tab5.addTab("Pedidos", panelpedidos);
 
-        panelingresos.setBackground(new java.awt.Color(0, 109, 123));
-
-        jTextField1.setBackground(new java.awt.Color(102, 102, 102));
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Id Ingreso");
-
-        jTextField2.setBackground(new java.awt.Color(102, 102, 102));
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("Ingreso");
-
-        jTextField4.setBackground(new java.awt.Color(102, 102, 102));
-        jTextField4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField4.setText("Servicio");
-
-        tablaingresos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaingresos);
-
-        jFormattedTextField1.setBackground(new java.awt.Color(102, 102, 102));
-        jFormattedTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField1.setCaretColor(new java.awt.Color(153, 153, 153));
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-
-        btnrein.setText("Reporte");
-        btnrein.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnreinActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelingresosLayout = new javax.swing.GroupLayout(panelingresos);
-        panelingresos.setLayout(panelingresosLayout);
-        panelingresosLayout.setHorizontalGroup(
-            panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(panelingresosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
-                .addComponent(btnrein)
-                .addContainerGap(393, Short.MAX_VALUE))
-        );
-        panelingresosLayout.setVerticalGroup(
-            panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelingresosLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnrein))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        tab5.addTab("Ingresos", panelingresos);
-
         panelservicios.setBackground(new java.awt.Color(0, 109, 123));
 
+        tablaservicios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tablaservicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -859,6 +821,7 @@ public class josuellorona extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaservicios.setRowHeight(20);
         tablaservicios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaserviciosMouseClicked(evt);
@@ -898,6 +861,8 @@ public class josuellorona extends javax.swing.JFrame {
         descserv.setText("Descripcion");
 
         insertarservicios.setBackground(new java.awt.Color(255, 255, 255));
+        insertarservicios.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        insertarservicios.setForeground(new java.awt.Color(0, 51, 51));
         insertarservicios.setText("Insertar");
         insertarservicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -906,6 +871,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnModificarServicio.setBackground(new java.awt.Color(255, 255, 255));
+        btnModificarServicio.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnModificarServicio.setForeground(new java.awt.Color(0, 51, 51));
         btnModificarServicio.setText("Modificar");
         btnModificarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -914,6 +881,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnEliminarServicio.setBackground(new java.awt.Color(255, 255, 255));
+        btnEliminarServicio.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnEliminarServicio.setForeground(new java.awt.Color(0, 51, 51));
         btnEliminarServicio.setText("Eliminar");
         btnEliminarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -922,6 +891,8 @@ public class josuellorona extends javax.swing.JFrame {
         });
 
         btnAgregarRefaccion.setBackground(new java.awt.Color(255, 255, 255));
+        btnAgregarRefaccion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnAgregarRefaccion.setForeground(new java.awt.Color(0, 51, 51));
         btnAgregarRefaccion.setText("Agregar");
         btnAgregarRefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -934,17 +905,14 @@ public class josuellorona extends javax.swing.JFrame {
         autoidserv.setForeground(new java.awt.Color(153, 153, 153));
         autoidserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Auto_id" }));
 
-        idempleadoserv.setBackground(new java.awt.Color(102, 102, 102));
-        idempleadoserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        idempleadoserv.setForeground(new java.awt.Color(153, 153, 153));
-        idempleadoserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id_empleado", "E001" }));
-
         clienteserv.setBackground(new java.awt.Color(102, 102, 102));
         clienteserv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         clienteserv.setForeground(new java.awt.Color(153, 153, 153));
         clienteserv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 51, 51));
         jButton6.setText("Quitar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -968,6 +936,8 @@ public class josuellorona extends javax.swing.JFrame {
         jScrollPane9.setViewportView(listaRefacciones1);
 
         btnserre1.setBackground(new java.awt.Color(255, 255, 255));
+        btnserre1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnserre1.setForeground(new java.awt.Color(0, 51, 51));
         btnserre1.setText("Reporte");
         btnserre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -980,11 +950,19 @@ public class josuellorona extends javax.swing.JFrame {
         panelserviciosLayout.setHorizontalGroup(
             panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelserviciosLayout.createSequentialGroup()
-                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelserviciosLayout.createSequentialGroup()
-                        .addContainerGap()
+                .addContainerGap()
+                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descserv)
+                    .addGroup(panelserviciosLayout.createSequentialGroup()
                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelserviciosLayout.createSequentialGroup()
+                                .addComponent(insertarservicios, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnserre1))
                             .addGroup(panelserviciosLayout.createSequentialGroup()
                                 .addComponent(nombreserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -994,36 +972,24 @@ public class josuellorona extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(autoidserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(costoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelserviciosLayout.createSequentialGroup()
-                                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelserviciosLayout.createSequentialGroup()
-                                        .addComponent(insertarservicios, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelserviciosLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(btnserre1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(descserv))))
+                                .addComponent(costoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(refaccionserv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelserviciosLayout.createSequentialGroup()
+                        .addComponent(btnAgregarRefaccion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(refaccionserv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panelserviciosLayout.createSequentialGroup()
-                                .addComponent(btnAgregarRefaccion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6))
-                            .addComponent(txtcantidadserv))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton6))
+                    .addComponent(txtcantidadserv))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(171, 171, 171))
+            .addGroup(panelserviciosLayout.createSequentialGroup()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelserviciosLayout.setVerticalGroup(
             panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1033,50 +999,171 @@ public class josuellorona extends javax.swing.JFrame {
                     .addComponent(jScrollPane4)
                     .addGroup(panelserviciosLayout.createSequentialGroup()
                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(nombreserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fechaserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(costoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(autoidserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(clienteserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(refaccionserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelserviciosLayout.createSequentialGroup()
-                                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(nombreserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fechaserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(costoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(autoidserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(clienteserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(refaccionserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelserviciosLayout.createSequentialGroup()
-                                        .addComponent(txtcantidadserv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(btnAgregarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(descserv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelserviciosLayout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtcantidadserv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnAgregarRefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelserviciosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(descserv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(insertarservicios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnserre1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnserre1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane9))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
 
         tab5.addTab("Servicios", panelservicios);
+
+        panelingresos.setBackground(new java.awt.Color(0, 109, 123));
+
+        jTextField1.setBackground(new java.awt.Color(102, 102, 102));
+        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField1.setText("Id Ingreso");
+
+        jTextField2.setBackground(new java.awt.Color(102, 102, 102));
+        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField2.setText("Ingreso");
+
+        jTextField4.setBackground(new java.awt.Color(102, 102, 102));
+        jTextField4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField4.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField4.setText("Servicio");
+
+        tablaingresos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tablaingresos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablaingresos.setRowHeight(20);
+        jScrollPane1.setViewportView(tablaingresos);
+
+        jFormattedTextField1.setBackground(new java.awt.Color(102, 102, 102));
+        jFormattedTextField1.setForeground(new java.awt.Color(153, 153, 153));
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField1.setCaretColor(new java.awt.Color(153, 153, 153));
+        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        btnrein.setBackground(new java.awt.Color(255, 255, 255));
+        btnrein.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnrein.setForeground(new java.awt.Color(0, 51, 51));
+        btnrein.setText("Reporte");
+        btnrein.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreinActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelingresosLayout = new javax.swing.GroupLayout(panelingresos);
+        panelingresos.setLayout(panelingresosLayout);
+        panelingresosLayout.setHorizontalGroup(
+            panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(panelingresosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnrein, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(465, Short.MAX_VALUE))
+        );
+        panelingresosLayout.setVerticalGroup(
+            panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelingresosLayout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnrein, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        tab5.addTab("Ingresos", panelingresos);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("DEPARTAMENTEO DE MANTENIMIENTO");
+
+        lblEmpleado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblEmpleado.setForeground(new java.awt.Color(255, 255, 255));
+        lblEmpleado.setText("EMPLEADO");
+
+        lblId.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblId.setForeground(new java.awt.Color(255, 0, 51));
+        lblId.setText("ID");
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tab5, javax.swing.GroupLayout.PREFERRED_SIZE, 1141, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblId)
+                .addGap(18, 18, 18)
+                .addComponent(lblEmpleado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab5, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblEmpleado)
+                    .addComponent(lblId)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(tab5, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1223,7 +1310,6 @@ public class josuellorona extends javax.swing.JFrame {
         int fila=tablaservicios.getSelectedRow();
         nombreserv.setText(tablaservicios.getValueAt(fila,1).toString());
         fechaserv.setText(tablaservicios.getValueAt(fila,2).toString());
-        idempleadoserv.setSelectedItem(tablaservicios.getValueAt(fila,3).toString());
         clienteserv.setSelectedItem(tablaservicios.getValueAt(fila,4).toString());
         autoidserv.setSelectedItem(tablaservicios.getValueAt(fila,5).toString());
         //refaccionserv.setSelectedItem(tablaservicios.getValueAt(fila,6).toString());
@@ -1241,13 +1327,11 @@ public class josuellorona extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Eliga un Auto");
         }else if (refaccionserv.getSelectedItem().equals("Refaccion")){
             JOptionPane.showMessageDialog(null, "Eliga las refacciones");
-        }else if(idempleadoserv.getSelectedItem().equals("Id_empleado")){
-            JOptionPane.showMessageDialog(null, "Eliga empleado");
         }else{
             try{
                 idClienteServ();
                 idRefaccionServ();
-                PreparedStatement ppst = con.conn.prepareStatement("call insertarServicio ('"+nombreserv.getText()+"','"+fechaserv.getText()+"','"+idempleadoserv.getSelectedItem()+"','"+idCliente2+"',"+autoidserv.getSelectedItem()+",'"+descserv.getText()+"',"+costoserv.getText()+");");
+                PreparedStatement ppst = con.conn.prepareStatement("call insertarServicio ('"+nombreserv.getText()+"','"+fechaserv.getText()+"','"+lblId.getText()+"','"+idCliente2+"',"+autoidserv.getSelectedItem()+",'"+descserv.getText()+"',"+costoserv.getText()+");");
                 ppst.executeUpdate();
                 servicios();
                 ingresos();
@@ -1258,11 +1342,14 @@ public class josuellorona extends javax.swing.JFrame {
                     try {
                         ResultSet rs = con.st.executeQuery("select id_refaccion from refacciones where nombre='"+modelo.getElementAt(i)+"'");
                         rs.last();
-                        con.insertaryact("insert into refaccion_usada(id_servicio,id_refaccion,cantidad) values("+cont+",'"+rs.getString(1)+"',"+modelo1.getElementAt(i)+")");
+                        PreparedStatement ppst2 = con.conn.prepareStatement("insert into refaccion_usada(id_servicio,id_refaccion,cantidad) values("+cont+",'"+rs.getString(1)+"',"+modelo1.getElementAt(i)+")");
+                        ppst2.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "DATOS INSERTADOS");
                     } catch (SQLException ex) {
                         JOptionPane.showMessageDialog(null, ex);
                     }
                 }
+                refacciones();
             }catch(SQLException e){
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -1298,13 +1385,18 @@ public class josuellorona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarRefaccionActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(modelo.getSize()>0){
-            int n=listaRefacciones.getSelectedIndex();
-            modelo.removeElementAt(n);
-            modelo1.removeElementAt(n);
+        if(listaRefacciones.getSelectedIndex()>=0){
+            if(modelo.getSize()>0){
+                int n=listaRefacciones.getSelectedIndex();
+                modelo.removeElementAt(n);
+                modelo1.removeElementAt(n);
+            }else{
+                JOptionPane.showMessageDialog(null, "seleccionar refaccion");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "seleccionar refaccion");
+            JOptionPane.showMessageDialog(null, "Seleccione la refaccion que desee quitar");
         }
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreActionPerformed
@@ -1314,9 +1406,8 @@ public class josuellorona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        ReporteServicio re = new ReporteServicio();
-        re.servicio();
+        new NewJFrame().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnserreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnre1ActionPerformed
@@ -1406,12 +1497,13 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JTextField estado;
     private javax.swing.JFormattedTextField fechapedido;
     private javax.swing.JFormattedTextField fechaserv;
-    private javax.swing.JComboBox<String> idempleadoserv;
     private javax.swing.JTextField idpedido;
     private javax.swing.JButton insertarautomovil;
     private javax.swing.JButton insertarservicios;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1423,6 +1515,8 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblEmpleado;
+    private javax.swing.JLabel lblId;
     private javax.swing.JList listaRefacciones;
     private DefaultListModel modelo;
     private javax.swing.JList listaRefacciones1;
