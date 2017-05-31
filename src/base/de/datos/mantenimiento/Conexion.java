@@ -43,7 +43,7 @@ public class Conexion {
              PreparedStatement ps= conn.prepareStatement(query);
              ps.execute();
              
-             if(query.startsWith("insert")||query.startsWith("Insert")||query.startsWith("INSERT")){
+             if(query.startsWith("call")||query.startsWith("Call")||query.startsWith("CALL")){
                  JOptionPane.showMessageDialog(null,"DATOS INSERTADOS");
              }else{
                  JOptionPane.showMessageDialog(null,"DATOS ACTUALIZADOS");
