@@ -906,6 +906,7 @@ public class josuellorona extends javax.swing.JFrame {
                                 .addComponent(nombreserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -921,6 +922,8 @@ public class josuellorona extends javax.swing.JFrame {
                     .addGroup(panelserviciosLayout.createSequentialGroup()
                         .addComponent(btnAgregarRefaccion)
 =======
+=======
+>>>>>>> 8b33e61c622b0b48f9e54722575d5fec78b53878
                                 .addComponent(fechaserv, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(clienteserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -939,6 +942,9 @@ public class josuellorona extends javax.swing.JFrame {
                                     .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(descserv)))
+<<<<<<< HEAD
+>>>>>>> 8b33e61c622b0b48f9e54722575d5fec78b53878
+=======
 >>>>>>> 8b33e61c622b0b48f9e54722575d5fec78b53878
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1058,9 +1064,13 @@ public class josuellorona extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addGap(54, 54, 54)
                 .addComponent(jButton1)
                 .addContainerGap(614, Short.MAX_VALUE))
+=======
+                .addContainerGap(577, Short.MAX_VALUE))
+>>>>>>> 8b33e61c622b0b48f9e54722575d5fec78b53878
 =======
                 .addContainerGap(577, Short.MAX_VALUE))
 >>>>>>> 8b33e61c622b0b48f9e54722575d5fec78b53878
