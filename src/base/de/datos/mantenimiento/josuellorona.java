@@ -242,6 +242,7 @@ public class josuellorona extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaingresos = new javax.swing.JTable();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        btnrein = new javax.swing.JButton();
         panelservicios = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tablaservicios = new javax.swing.JTable();
@@ -265,6 +266,7 @@ public class josuellorona extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         modelo1 = new DefaultListModel();
         listaRefacciones1 = new javax.swing.JList();
+        btnserre1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -803,6 +805,13 @@ public class josuellorona extends javax.swing.JFrame {
         jFormattedTextField1.setCaretColor(new java.awt.Color(153, 153, 153));
         jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        btnrein.setText("Reporte");
+        btnrein.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreinActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelingresosLayout = new javax.swing.GroupLayout(panelingresos);
         panelingresos.setLayout(panelingresosLayout);
         panelingresosLayout.setHorizontalGroup(
@@ -817,17 +826,20 @@ public class josuellorona extends javax.swing.JFrame {
                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(577, Short.MAX_VALUE))
+                .addGap(107, 107, 107)
+                .addComponent(btnrein)
+                .addContainerGap(393, Short.MAX_VALUE))
         );
         panelingresosLayout.setVerticalGroup(
             panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelingresosLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(panelingresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnrein))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -955,6 +967,14 @@ public class josuellorona extends javax.swing.JFrame {
         listaRefacciones1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jScrollPane9.setViewportView(listaRefacciones1);
 
+        btnserre1.setBackground(new java.awt.Color(255, 255, 255));
+        btnserre1.setText("Reporte");
+        btnserre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnserre1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelserviciosLayout = new javax.swing.GroupLayout(panelservicios);
         panelservicios.setLayout(panelserviciosLayout);
         panelserviciosLayout.setHorizontalGroup(
@@ -985,7 +1005,12 @@ public class josuellorona extends javax.swing.JFrame {
                                         .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(idempleadoserv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(descserv)))
+                                .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelserviciosLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(btnserre1)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(descserv))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(refaccionserv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1033,10 +1058,12 @@ public class josuellorona extends javax.swing.JFrame {
                         .addGroup(panelserviciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(insertarservicios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnserre1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane9))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
         );
 
         tab5.addTab("Servicios", panelservicios);
@@ -1286,17 +1313,26 @@ public class josuellorona extends javax.swing.JFrame {
         re.generarReporte();
     }//GEN-LAST:event_btnreActionPerformed
 
-    private void btnserreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnserreActionPerformed
-        // TODO add your handling code here:
-        RS re1 = new RS();
-        re1.generarReporte();
-    }//GEN-LAST:event_btnserreActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         ReporteServicio re = new ReporteServicio();
         re.servicio();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnserreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnre1ActionPerformed
+       RS re = new RS();
+       re.generarReporte();
+    }//GEN-LAST:event_btnre1ActionPerformed
+
+    private void btnserre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnserre1ActionPerformed
+        ReporteServicio re = new ReporteServicio();
+        re.servicio();
+    }//GEN-LAST:event_btnserre1ActionPerformed
+
+    private void btnreinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreinActionPerformed
+       RS re = new RS();
+       re.generarReporte();
+    }//GEN-LAST:event_btnreinActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1353,6 +1389,8 @@ public class josuellorona extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarRefaccion;
     private javax.swing.JButton btnModificarServicio;
     private javax.swing.JButton btnre;
+    private javax.swing.JButton btnrein;
+    private javax.swing.JButton btnserre1;
     private javax.swing.JPanel clientes;
     private javax.swing.JComboBox<String> clienteserv;
     private javax.swing.JComboBox<String> cmbcliente;
